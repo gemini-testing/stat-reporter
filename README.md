@@ -1,2 +1,3 @@
-# brostatit
-Плагин для gemini и hermione, который позволяет выводить статистику о пройденных тестах для каждого из браузеров
+# stat-reporter
+Plugin for gemini and hermione tools, which allows to collect and provide test statistic for each
+of used browsers.
