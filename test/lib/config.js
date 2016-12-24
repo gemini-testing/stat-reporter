@@ -4,17 +4,15 @@ const config = require('../../lib/config');
 
 describe('config', () => {
     afterEach(() => {
-        /*eslint-disable */
-        delete process.env.brostatit_enabled;
-        delete process.env.brostatit_reporters_flat_enabled;
-        delete process.env.brostatit_reporters_html_enabled;
-        delete process.env.brostatit_reporters_html_path;
-        /*eslint-enable */
+        delete process.env['stat_reporter_enabled'];
+        delete process.env['stat_reporter_reporters_flat_enabled'];
+        delete process.env['stat_reporter_reporters_html_enabled'];
+        delete process.env['stat_reporter_reporters_html_path'];
     });
 
     describe('by default', () => {
-        it('should be disabled', () => {
-            assert.equal(config({}).enabled, false);
+        it('should be enabled', () => {
+            assert.equal(config({}).enabled, true);
         });
 
         it('should have enabled flat reporter', () => {
@@ -23,20 +21,6 @@ describe('config', () => {
 
         it('should have disabled html reporter', () => {
             assert.equal(config({}).reporters.html.enabled, false);
-        });
-    });
-
-    describe('should enable plugin', () => {
-        it('by given configuration', () => {
-            assert.equal(config({enabled: true}).enabled, true);
-        });
-
-        it('by environment variable', () => {
-            /*eslint-disable */
-            process.env.brostatit_enabled = true;
-            /*eslint-enable */
-
-            assert.equal(config({}).enabled, true);
         });
     });
 
@@ -54,9 +38,7 @@ describe('config', () => {
         });
 
         it('by environment variable', () => {
-            /*eslint-disable */
-            process.env.brostatit_reporters_flat_enabled = false;
-            /*eslint-enable */
+            process.env['stat_reporter_reporters_flat_enabled'] = false;
 
             assert.equal(config({}).reporters.flat.enabled, false);
         });
@@ -76,9 +58,7 @@ describe('config', () => {
         });
 
         it('by environment variable', () => {
-            /*eslint-disable */
-            process.env.brostatit_reporters_html_enabled = true;
-            /*eslint-enable */
+            process.env['stat_reporter_reporters_html_enabled'] = true;
 
             assert.equal(config({}).reporters.html.enabled, true);
         });
@@ -98,9 +78,7 @@ describe('config', () => {
         });
 
         it('from environment variable', () => {
-            /*eslint-disable */
-            process.env.brostatit_reporters_html_path = 'some/file/path.html';
-            /*eslint-enable */
+            process.env['stat_reporter_reporters_html_path'] = 'some/file/path.html';
 
             assert.equal(config({}).reporters.html.path, 'some/file/path.html');
         });

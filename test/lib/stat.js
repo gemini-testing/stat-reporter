@@ -1,12 +1,19 @@
 'use strict';
 
-const Model = require('../../lib/model');
+const Model = require('../../lib/stat');
 
 describe('lib/model', () => {
     const sandbox = sinon.sandbox.create();
 
     let model;
     let clock;
+
+    function addStat_(statFunc) {
+        const browserId = 'some-id';
+        model.markStartBrowserTime(browserId);
+        statFunc.call(model, browserId);
+        model.markEndBrowserTime(browserId);
+    }
 
     beforeEach(() => {
         clock = sandbox.useFakeTimers();
@@ -22,11 +29,10 @@ describe('lib/model', () => {
         assert.deepEqual(model.getStatistic(), []);
     });
 
-    describe('startBrowserTime', () => {
+    describe('markStartBrowserTime', () => {
         it('should set browser start time', () => {
             const browserId = 'some-id';
-            model.startBrowserTime(browserId);
-            model.markBrowserTime(browserId);
+            model.markStartBrowserTime(browserId);
 
             assert.deepEqual(model.getStatistic()[0].timeStart, new Date(0));
         });
@@ -34,48 +40,48 @@ describe('lib/model', () => {
         it('should set browser start time only once for given browser', () => {
             const browserId = 'some-id';
 
-            model.startBrowserTime(browserId);
+            model.markStartBrowserTime(browserId);
             clock.tick(300);
-            model.startBrowserTime(browserId);
+            model.markStartBrowserTime(browserId);
 
-            model.markBrowserTime(browserId);
+            model.markEndBrowserTime(browserId);
 
             assert.deepEqual(model.getStatistic()[0].timeStart, new Date(0));
         });
 
         it('should set own start time for each of browsers', () => {
-            model.startBrowserTime('some-id');
+            model.markStartBrowserTime('some-id');
             clock.tick(300);
-            model.startBrowserTime('some-another-id');
+            model.markStartBrowserTime('some-another-id');
 
-            model.markBrowserTime('some-id');
-            model.markBrowserTime('some-another-id');
+            model.markEndBrowserTime('some-id');
+            model.markEndBrowserTime('some-another-id');
 
             assert.deepEqual(model.getStatistic()[0].timeStart, new Date(0));
             assert.deepEqual(model.getStatistic()[1].timeStart, new Date(300));
         });
     });
 
-    describe('markBrowserTime', () => {
+    describe('markEndBrowserTime', () => {
         it('should mark browser time end', () => {
             const browserId = 'some-id';
 
-            model.startBrowserTime(browserId);
+            model.markStartBrowserTime(browserId);
             clock.tick(100);
-            model.markBrowserTime(browserId);
+            model.markEndBrowserTime(browserId);
 
             assert.deepEqual(model.getStatistic()[0].timeEnd, new Date(100));
         });
 
         it('should rewrite browser time end for each call', () => {
             const browserId = 'some-id';
-            model.startBrowserTime(browserId);
+            model.markStartBrowserTime(browserId);
 
             clock.tick(100);
-            model.markBrowserTime(browserId);
+            model.markEndBrowserTime(browserId);
 
             clock.tick(100);
-            model.markBrowserTime(browserId);
+            model.markEndBrowserTime(browserId);
 
             assert.deepEqual(model.getStatistic()[0].timeEnd, new Date(200));
         });
@@ -83,10 +89,7 @@ describe('lib/model', () => {
 
     describe('addPassed', () => {
         beforeEach(() => {
-            const browserId = 'some-id';
-            model.startBrowserTime(browserId);
-            model.addPassed(browserId);
-            model.markBrowserTime(browserId);
+            addStat_(model.addPassed);
         });
 
         it('should increase common amount of tests', () => {
@@ -100,10 +103,7 @@ describe('lib/model', () => {
 
     describe('addFailed', () => {
         beforeEach(() => {
-            const browserId = 'some-id';
-            model.startBrowserTime(browserId);
-            model.addFailed(browserId);
-            model.markBrowserTime(browserId);
+            addStat_(model.addFailed);
         });
 
         it('should increase common amount of tests', () => {
@@ -117,10 +117,7 @@ describe('lib/model', () => {
 
     describe('addSkipped', () => {
         beforeEach(() => {
-            const browserId = 'some-id';
-            model.startBrowserTime(browserId);
-            model.addSkipped(browserId);
-            model.markBrowserTime(browserId);
+            addStat_(model.addSkipped);
         });
 
         it('should increase common amount of tests', () => {
@@ -134,10 +131,7 @@ describe('lib/model', () => {
 
     describe('addRetry', () => {
         beforeEach(() => {
-            const browserId = 'some-id';
-            model.startBrowserTime(browserId);
-            model.addRetry(browserId);
-            model.markBrowserTime(browserId);
+            addStat_(model.addRetry);
         });
 
         it('should not increase common amount of tests', () => {
@@ -154,9 +148,9 @@ describe('lib/model', () => {
 
         beforeEach(() => {
             browserId = 'some-id';
-            model.startBrowserTime(browserId);
+            model.markStartBrowserTime(browserId);
             clock.tick(100);
-            model.markBrowserTime(browserId);
+            model.markEndBrowserTime(browserId);
         });
 
         it('should set browser identifier for stat item', () => {
