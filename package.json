@@ -35,7 +35,8 @@
     "fs-extra": "^1.0.0",
     "gemini-configparser": "^0.3.0",
     "html-tablify": "^2.0.2",
-    "lodash": "^4.15.0"
+    "lodash": "^4.15.0",
+    "moment": "^2.17.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
