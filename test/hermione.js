@@ -5,7 +5,7 @@ const QEmitter = require('qemitter');
 
 const lib = require('../lib/index');
 const Stat = require('../lib/stat');
-const hermionePlug = require('../hermione');
+const hermionePlugin = require('../hermione');
 
 function mkHermione_() {
     return _.extend(new QEmitter(), {
@@ -28,12 +28,10 @@ describe('hermione', () => {
 
     beforeEach(() => {
         hermione = mkHermione_();
-        hermionePlug(hermione, {enabled: true});
+        hermionePlugin(hermione, {enabled: true});
     });
 
-    afterEach(() => {
-        sandbox.restore();
-    });
+    afterEach(() => sandbox.restore());
 
     it('should start browser time on "SESSION_START" event', () => {
         sandbox.stub(Stat.prototype, 'markStartBrowserTime');
@@ -79,8 +77,11 @@ describe('hermione', () => {
 
     it('should show collected statistic data on "RUNNER_END" event', () => {
         sandbox.stub(lib, 'showReport');
+        sandbox.stub(Stat.prototype, 'getStatistic').returns('some-statistic');
+
         hermione.emit(hermione.events.RUNNER_END);
 
-        assert.called(lib.showReport);
+        assert.calledOnce(lib.showReport);
+        assert.calledWith(lib.showReport, 'some-statistic', sinon.match.object);
     });
 });
