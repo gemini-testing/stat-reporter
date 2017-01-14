@@ -5,7 +5,7 @@ const QEmitter = require('qemitter');
 
 const lib = require('../lib/index');
 const Stat = require('../lib/stat');
-const geminiPlug = require('../gemini');
+const geminiPlugin = require('../gemini');
 
 function mkGemini_() {
     return _.extend(new QEmitter(), {
@@ -27,10 +27,19 @@ describe('gemini', () => {
 
     beforeEach(() => {
         gemini = mkGemini_();
-        geminiPlug(gemini, {enabled: true});
+        geminiPlugin(gemini, {enabled: true});
     });
 
     afterEach(() => sandbox.restore());
+
+    it('should do nothing for disabled plugin', () => {
+        gemini = mkGemini_();
+        const onSpy = sinon.spy(gemini.on);
+
+        geminiPlugin(gemini, {enabled: false});
+
+        assert.notCalled(onSpy);
+    });
 
     it('should start browser time on "START_BROWSER" event', () => {
         sandbox.stub(Stat.prototype, 'markStartBrowserTime');

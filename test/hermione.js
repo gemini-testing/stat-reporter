@@ -33,6 +33,15 @@ describe('hermione', () => {
 
     afterEach(() => sandbox.restore());
 
+    it('should do nothing for disabled plugin', () => {
+        hermione = mkHermione_();
+        const onSpy = sinon.spy(hermione.on);
+
+        hermionePlugin(hermione, {enabled: false});
+
+        assert.notCalled(onSpy);
+    });
+
     it('should start browser time on "SESSION_START" event', () => {
         sandbox.stub(Stat.prototype, 'markStartBrowserTime');
         hermione.emit(hermione.events.SESSION_START, sinon.stub(), {browserId: 'some-browser'});
