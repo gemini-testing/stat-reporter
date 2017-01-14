@@ -1,6 +1,6 @@
 # stat-reporter
 
-[![npm](https://img.shields.io/npm/v/stat-reporter.svg?maxAge=2592000)](https://www.npmjs.com/package/stat-reporter)
+[![npm](https://img.shields.io/npm/v/npm.svg)](https://www.npmjs.com/package/stat-reporter)
 [![Build Status](https://travis-ci.org/gemini-testing/stat-reporter.svg?branch=master)](https://travis-ci.org/gemini-testing/stat-reporter)
 [![Coverage Status](https://img.shields.io/coveralls/gemini-testing/stat-reporter.svg?style=flat)](https://coveralls.io/r/gemini-testing/stat-reporter?branch=master)
 

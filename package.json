@@ -11,6 +11,7 @@
     "test": "npm run lint && npm run test-unit",
     "test-unit": "mocha test",
     "cover": "istanbul cover _mocha test",
+    "coveralls": "npm i coveralls && npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
     "precommit": "npm run lint",
     "commitmsg": "conventional-changelog-lint -e",
     "release": "standard-version"
