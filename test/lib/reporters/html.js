@@ -3,7 +3,7 @@
 const util = require('../../../lib/reporters/util');
 const htmlReporter = require('../../../lib/reporters/html');
 
-const testUtils = require('./_test-utils');
+const testUtils = require('./test-utils');
 
 const getDefaultOpts = () => ({path: 'stat-reporter.html'});
 

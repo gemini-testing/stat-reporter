@@ -3,7 +3,7 @@
 const chalk = require('chalk');
 const flatReporter = require('../../../lib/reporters/flat');
 
-const testUtils = require('./_test-utils');
+const testUtils = require('./test-utils');
 
 describe('lib/reporters/flat', () => {
     const sandbox = sinon.sandbox.create();

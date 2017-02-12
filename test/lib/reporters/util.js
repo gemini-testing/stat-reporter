@@ -12,10 +12,6 @@ describe('lib/util', () => {
         it('should transform duration into human readable format with minutes and seconds', () => {
             assert.equal(util.humanizeDuration(61000), '01:01');
         });
-
-        it('should return "n/a" if duration was not set', () => {
-            assert.equal(util.humanizeDuration(null), 'n/a');
-        });
     });
 
     describe('saveFile', () => {

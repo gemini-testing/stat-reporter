@@ -30,8 +30,10 @@ Plugin has following configuration:
         * **enabled** (optional) `Boolean` - enable/disable the flat reporter; by default reporter is enabled
     * **html** (optional) `Object` - html reporter configuration
         * **enabled** (optional) `Boolean` - enable/disable the html reporter; by default reporter is disabled
-        * **path** (optional) `String` - path for saving html report file; by default html report will be saved into
-`stat-reporter.html` inside current work directory.
+        * **path** (optional) `String` - path for saving html report file; by default html report will be saved into `stat-reporter.html` inside current work directory.
+    * **json** (optional) `Object` - json reporter configuration
+        * **enabled** (optional) `Boolean` - enable/disable the json reporter; by default reporter is disabled
+        * **path** (optional) `String` - path for saving json report file; by default json report will be saved into `stat-reporter.json` inside current work directory.
 
 Also there is ability to override plugin parameters by CLI options or environment variables
 (see [configparser](https://github.com/gemini-testing/configparser)).
