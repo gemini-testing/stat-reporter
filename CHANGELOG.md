@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.2.1"></a>
+## [0.2.1](https://github.com/gemini-testing/stat-reporter/compare/v0.2.0...v0.2.1) (2017-03-09)
+
+
+### Bug Fixes
+
+* change date format from 12h to 24h ([ecb7ba0](https://github.com/gemini-testing/stat-reporter/commit/ecb7ba0))
+
+
+
 <a name="0.2.0"></a>
 # [0.2.0](https://github.com/gemini-testing/stat-reporter/compare/v0.1.0...v0.2.0) (2017-02-16)
 
