@@ -39,7 +39,7 @@ describe('lib/reporters/json', () => {
             it(`${item} (special date)`, () => {
                 const data = _.set({}, 'time' + _.capitalize(item), new Date(2017, 0, 1));
 
-                assert.propertyVal(reportJSON_(data), item, '2017-01-01 12:00:00');
+                assert.propertyVal(reportJSON_(data), item, '2017-01-01 00:00:00');
             });
         });
 
