@@ -1,6 +1,7 @@
 'use strict';
 
 const lib = require('./lib');
+const Stat = lib.Stat;
 
 module.exports = (hermione, options) => {
     options = lib.parseConfig(options);
@@ -10,7 +11,7 @@ module.exports = (hermione, options) => {
     }
 
     const events = hermione.events;
-    const stat = new lib.Stat();
+    const stat = new Stat();
 
     hermione.on(events.SESSION_START, (wd, data) => stat.markStartBrowserTime(data.browserId));
     hermione.on(events.SESSION_END, (wd, data) => stat.markEndBrowserTime(data.browserId));

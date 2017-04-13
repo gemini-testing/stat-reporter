@@ -1,6 +1,7 @@
 'use strict';
 
 const lib = require('./lib');
+const Stat = lib.Stat;
 
 module.exports = (gemini, options) => {
     options = lib.parseConfig(options);
@@ -10,9 +11,14 @@ module.exports = (gemini, options) => {
     }
 
     const events = gemini.events;
-    const stat = new lib.Stat();
+    const stat = new Stat();
 
-    gemini.on(events.START_BROWSER, (data) => stat.markStartBrowserTime(data.id));
+    gemini.on(events.START_BROWSER, (data) => {
+        stat.markStartBrowserTime(data.id);
+        stat.setSessionsPerBrowser(data.id, data.config.sessionsPerBrowser);
+        stat.setSuitesPerSession(data.id, data.config.suitesPerSession);
+    });
+
     gemini.on(events.STOP_BROWSER, (data) => stat.markEndBrowserTime(data.id));
 
     gemini.on(events.TEST_RESULT, (data) => {

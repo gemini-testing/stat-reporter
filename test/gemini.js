@@ -43,9 +43,29 @@ describe('gemini', () => {
 
     it('should start browser time on "START_BROWSER" event', () => {
         sandbox.stub(Stat.prototype, 'markStartBrowserTime');
-        gemini.emit(gemini.events.START_BROWSER, {id: 'some-browser'});
+        gemini.emit(gemini.events.START_BROWSER, {id: 'some-browser', config: {}});
 
         assert.calledWith(Stat.prototype.markStartBrowserTime, 'some-browser');
+    });
+
+    it('should set browser "sessionsPerBrowser" value on "START_BROWSER" event', () => {
+        sandbox.stub(Stat.prototype, 'setSessionsPerBrowser');
+        gemini.emit(gemini.events.START_BROWSER, {
+            id: 'some-browser',
+            config: {sessionsPerBrowser: 99}
+        });
+
+        assert.calledWith(Stat.prototype.setSessionsPerBrowser, 'some-browser', 99);
+    });
+
+    it('should set browser "suitesPerSession" value on "START_BROWSER" event', () => {
+        sandbox.stub(Stat.prototype, 'setSuitesPerSession');
+        gemini.emit(gemini.events.START_BROWSER, {
+            id: 'some-browser',
+            config: {suitesPerSession: 99}
+        });
+
+        assert.calledWith(Stat.prototype.setSuitesPerSession, 'some-browser', 99);
     });
 
     it('should mark browser time on "STOP_BROWSER" event', () => {
