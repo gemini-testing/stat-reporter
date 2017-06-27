@@ -12,8 +12,8 @@ module.exports = (hermione, options) => {
     const events = hermione.events;
     const stat = new lib.Stat();
 
-    hermione.on(events.SESSION_START, (wd, data) => stat.markStartBrowserTime(data.browserId));
-    hermione.on(events.SESSION_END, (wd, data) => stat.markEndBrowserTime(data.browserId));
+    hermione.on(events.SESSION_START, (session) => stat.markStartBrowserTime(session.browserId));
+    hermione.on(events.SESSION_END, (session) => stat.markEndBrowserTime(session.browserId));
 
     hermione.on(events.TEST_FAIL, (data) => stat.addFailed(data.browserId));
     hermione.on(events.TEST_PASS, (data) => stat.addPassed(data.browserId));
