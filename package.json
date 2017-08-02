@@ -1,6 +1,6 @@
 {
   "name": "stat-reporter",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Common plugin for gemini and hermione tools for displaying test browser statistic",
   "repository": {
     "type": "git",
