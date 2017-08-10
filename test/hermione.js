@@ -1,14 +1,14 @@
 'use strict';
 
 const _ = require('lodash');
-const QEmitter = require('qemitter');
+const AsyncEmitter = require('gemini-core').AsyncEmitter;
 
 const lib = require('../lib/index');
 const Stat = require('../lib/stat');
 const hermionePlugin = require('../hermione');
 
 function mkHermione_() {
-    return _.extend(new QEmitter(), {
+    return _.extend(new AsyncEmitter(), {
         events: {
             SESSION_START: 'startSession',
             SESSION_END: 'endSession',
