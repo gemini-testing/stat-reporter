@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/gemini-testing/stat-reporter/compare/v0.2.2...v0.3.0) (2017-10-19)
+
+
+### Features
+
+* drop node@4- support ([67773b0](https://github.com/gemini-testing/stat-reporter/commit/67773b0))
+* Use --stat-reporter- as a cli prefix for plugin options ([a662396](https://github.com/gemini-testing/stat-reporter/commit/a662396))
+
+
+
 <a name="0.2.2"></a>
 ## [0.2.2](https://github.com/gemini-testing/stat-reporter/compare/v0.2.1...v0.2.2) (2017-08-02)
 
