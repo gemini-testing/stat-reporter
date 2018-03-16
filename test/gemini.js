@@ -1,14 +1,14 @@
 'use strict';
 
 const _ = require('lodash');
-const QEmitter = require('qemitter');
+const AsyncEmitter = require('gemini-core').AsyncEmitter;
 
 const lib = require('../lib/index');
 const Stat = require('../lib/stat');
 const geminiPlugin = require('../gemini');
 
 function mkGemini_() {
-    return _.extend(new QEmitter(), {
+    return _.extend(new AsyncEmitter(), {
         events: {
             START_BROWSER: 'startBrowser',
             STOP_BROWSER: 'stopBrowser',
