@@ -54,7 +54,8 @@ describe('lib/reporters/json', () => {
             'passed',
             'failed',
             'skipped',
-            'retries'
+            'retries',
+            'sessions'
         ].forEach((field) => {
             it(`${field} (should be passed as is)`, () => {
                 assert.propertyVal(reportJSON_(_.set({}, field, 100500)), field, 100500);

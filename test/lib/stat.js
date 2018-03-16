@@ -60,6 +60,31 @@ describe('lib/model', () => {
             assert.deepEqual(model.getStatistic()[0].timeStart, new Date(0));
             assert.deepEqual(model.getStatistic()[1].timeStart, new Date(300));
         });
+
+        it('should increase "sessions" counter', () => {
+            const browserId = 'some-id';
+            model.markStartBrowserTime(browserId);
+
+            assert.deepEqual(model.getStatistic()[0].sessions, 1);
+        });
+
+        it('should increase "sessions" counter for each call', () => {
+            const browserId = 'some-id';
+            model.markStartBrowserTime(browserId);
+            model.markStartBrowserTime(browserId);
+
+            assert.deepEqual(model.getStatistic()[0].sessions, 2);
+        });
+
+        it('should count used sessions number for each browser separately', () => {
+            model.markStartBrowserTime('some-id1');
+            model.markStartBrowserTime('some-id1');
+
+            model.markStartBrowserTime('some-id2');
+
+            assert.deepEqual(model.getStatistic()[0].sessions, 2);
+            assert.deepEqual(model.getStatistic()[1].sessions, 1);
+        });
     });
 
     describe('markEndBrowserTime', () => {
