@@ -6,10 +6,13 @@ const QEmitter = require('qemitter');
 const lib = require('../lib/index');
 const Stat = require('../lib/stat');
 const hermionePlugin = require('../hermione');
+const cliCommands = require('../lib/cli-commands');
+const utils = require('../lib/utils');
 
 function mkHermione_() {
     return _.extend(new QEmitter(), {
         events: {
+            CLI: 'cli',
             SESSION_START: 'startSession',
             SESSION_END: 'endSession',
             TEST_PASS: 'passTest',
@@ -24,11 +27,15 @@ function mkHermione_() {
 describe('hermione', () => {
     const sandbox = sinon.sandbox.create();
 
+    let cliModuleStub;
     let hermione;
 
     beforeEach(() => {
         hermione = mkHermione_();
         hermionePlugin(hermione, {enabled: true});
+
+        cliModuleStub = sandbox.stub();
+        sandbox.stub(utils, 'requireCliModule').returns(cliModuleStub);
     });
 
     afterEach(() => sandbox.restore());
@@ -40,6 +47,20 @@ describe('hermione', () => {
         hermionePlugin(hermione, {enabled: false});
 
         assert.notCalled(onSpy);
+    });
+
+    it('should load all cli commands', () => {
+        hermione.emit(hermione.events.CLI);
+
+        _.forEach(cliCommands, (name) => assert.calledOnceWith(utils.requireCliModule, name));
+    });
+
+    it('should require all cli commands on "CLI" event', () => {
+        const commander = {some: 'values'};
+
+        hermione.emit(hermione.events.CLI, commander);
+
+        assert.alwaysCalledWith(cliModuleStub, commander);
     });
 
     it('should start browser time on "SESSION_START" event', () => {

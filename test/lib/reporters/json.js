@@ -1,28 +1,30 @@
 'use strict';
 
 const _ = require('lodash');
-const util = require('../../../lib/reporters/util');
+const utils = require('../../../lib/utils');
 const jsonReporter = require('../../../lib/reporters/json');
 
-const testUtils = require('./test-utils');
+const testUtils = require('../test-utils');
 
 describe('lib/reporters/json', () => {
     const sandbox = sinon.sandbox.create();
 
-    beforeEach(() => sandbox.stub(util, 'saveFile'));
+    beforeEach(() => {
+        sandbox.stub(utils, 'saveJsonReport');
+    });
 
     afterEach(() => sandbox.restore());
 
     it('should save model into file with given path', () => {
-        jsonReporter(testUtils.generateStatData(), {path: 'some-file.json'});
+        jsonReporter(testUtils.generateStatData(), {path: 'some-path/file.json'});
 
-        assert.calledWith(util.saveFile, 'some-file.json');
+        assert.calledOnceWith(utils.saveJsonReport, 'some-path/file.json');
     });
 
     describe('should have valid value for', () => {
         function reportJSON_(options) {
-            jsonReporter(testUtils.generateStatData(options), {});
-            return JSON.parse(util.saveFile.firstCall.args[1])[0];
+            jsonReporter(testUtils.generateStatData(options), {path: 'some-path'});
+            return utils.saveJsonReport.firstCall.args[1][0];
         }
 
         it('browser', () => {

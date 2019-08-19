@@ -1,9 +1,11 @@
 'use strict';
 
 const chalk = require('chalk');
+const _ = require('lodash');
 const flatReporter = require('../../../lib/reporters/flat');
+const constants = require('../../../lib/constants');
 
-const testUtils = require('./test-utils');
+const testUtils = require('../test-utils');
 
 describe('lib/reporters/flat', () => {
     const sandbox = sinon.sandbox.create();
@@ -22,6 +24,14 @@ describe('lib/reporters/flat', () => {
     });
 
     describe('should draw', () => {
+        it('headers of the received columns', () => {
+            flatReporter([]);
+
+            _.forEach(constants.getFlatColumns, column => {
+                assert.include(console.info.firstCall.args[0], column.Header);
+            });
+        });
+
         it('"passed" tests status if browser statistic has not failed tests', () => {
             flatReporter(testUtils.generateStatData({failed: 0}));
 
