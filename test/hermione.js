@@ -2,14 +2,17 @@
 
 const _ = require('lodash');
 const QEmitter = require('qemitter');
+const proxyquire = require('proxyquire');
 
 const lib = require('../lib/index');
 const Stat = require('../lib/stat');
-const hermionePlugin = require('../hermione');
+// const hermionePlugin = require('../hermione');
+let hermionePlugin;
 
 function mkHermione_() {
     return _.extend(new QEmitter(), {
         events: {
+            CLI: 'cli',
             SESSION_START: 'startSession',
             SESSION_END: 'endSession',
             TEST_PASS: 'passTest',
@@ -23,11 +26,15 @@ function mkHermione_() {
 
 describe('hermione', () => {
     const sandbox = sinon.sandbox.create();
+    const mergeSpy = sandbox.spy();
 
     let hermione;
 
     beforeEach(() => {
         hermione = mkHermione_();
+        hermionePlugin = proxyquire('../hermione', {
+            './lib/cli-commands/merge-stat-reports': mergeSpy
+        });
         hermionePlugin(hermione, {enabled: true});
     });
 
@@ -40,6 +47,17 @@ describe('hermione', () => {
         hermionePlugin(hermione, {enabled: false});
 
         assert.notCalled(onSpy);
+    });
+
+    it('should require cli command on "CLI" event', () => {
+        let commander = {
+            prependListener: sandbox.spy()
+        };
+
+        hermione.emit(hermione.events.CLI, commander);
+
+        assert.calledWith(mergeSpy, commander);
+        assert.calledWith(commander.prependListener, 'command:merge-stat-reports');
     });
 
     it('should start browser time on "SESSION_START" event', () => {
