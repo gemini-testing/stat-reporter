@@ -16,7 +16,7 @@
     "release": "standard-version"
   },
   "engines": {
-    "node": ">= 6"
+    "node": ">= 8"
   },
   "keywords": [
     "gemini",
