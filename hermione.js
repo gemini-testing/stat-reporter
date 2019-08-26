@@ -1,6 +1,10 @@
 'use strict';
 
 const lib = require('./lib');
+const cliCommands = require('./lib/cli-commands');
+const utils = require('./lib/utils');
+
+const _ = require('lodash');
 
 module.exports = (hermione, options) => {
     options = lib.parseConfig(options);
@@ -11,6 +15,12 @@ module.exports = (hermione, options) => {
 
     const events = hermione.events;
     const stat = new lib.Stat();
+
+    hermione.on(events.CLI, (commander) => {
+        _.values(cliCommands).forEach(command => {
+            utils.requireCliModule(command)(commander);
+        });
+    });
 
     hermione.on(events.SESSION_START, (wd, data) => stat.markStartBrowserTime(data.browserId));
     hermione.on(events.SESSION_END, (wd, data) => stat.markEndBrowserTime(data.browserId));

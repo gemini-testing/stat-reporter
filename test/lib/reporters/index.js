@@ -29,8 +29,8 @@ describe('showStatistic', () => {
             }
         });
 
-        assert.called(flatSpy);
-        assert.called(htmlSpy);
+        assert.calledOnce(flatSpy);
+        assert.calledOnce(htmlSpy);
     });
 
     it('should not use disabled reporters', () => {
@@ -55,7 +55,7 @@ describe('showStatistic', () => {
             }
         });
 
-        assert.calledWith(flatSpy, statistic);
+        assert.calledOnceWith(flatSpy, statistic);
     });
 
     it('should use own reporter options', () => {
@@ -68,6 +68,6 @@ describe('showStatistic', () => {
 
         showReport(sandbox.stub(), options);
 
-        assert.calledWith(flatSpy, sinon.match.any, options.reporters.flat);
+        assert.calledOnceWith(flatSpy, sinon.match.any, options.reporters.flat);
     });
 });

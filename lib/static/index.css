@@ -1,0 +1,9 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.table-detail {
+    padding: 10px;
+    background-color: rgba(190, 190, 190, 0.3);
+}

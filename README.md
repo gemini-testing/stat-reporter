@@ -80,6 +80,22 @@ module.exports = {
 };
 ```
 
+## Additional commands
+
+Additional commands that are added to the tool for which this plugin is connected.
+
+### merge-stat-reports
+
+Command that adds ability to merge reports which are created after running the tests.
+
+**Attention!** This plugin works only for Hermione
+
+Example of usage:
+```
+npx hermione merge-stat-reports src-report-1.json src-report-2.json --html dest-html-report --json report.json
+```
+
+
 ## Testing
 
 Run [mocha](http://mochajs.org) tests:
