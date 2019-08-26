@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.4.0"></a>
+# [0.4.0](https://github.com/gemini-testing/stat-reporter/compare/v0.3.1...v0.4.0) (2019-08-26)
+
+
+### Features
+
+* add new cli command 'merge-stat-reports' ([a19b651](https://github.com/gemini-testing/stat-reporter/commit/a19b651))
+* drop node 6 support ([e073d95](https://github.com/gemini-testing/stat-reporter/commit/e073d95))
+
+
+
 <a name="0.3.0"></a>
 # [0.3.0](https://github.com/gemini-testing/stat-reporter/compare/v0.2.2...v0.3.0) (2017-10-19)
 
