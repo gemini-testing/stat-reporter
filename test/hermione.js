@@ -63,16 +63,16 @@ describe('hermione', () => {
         assert.alwaysCalledWith(cliModuleStub, commander);
     });
 
-    it('should start browser time on "SESSION_START" event', () => {
+    it('should start browser time on "TEST_BEGIN" event', () => {
         sandbox.stub(Stat.prototype, 'markStartBrowserTime');
-        hermione.emit(hermione.events.SESSION_START, sinon.stub(), {browserId: 'some-browser'});
+        hermione.emit(hermione.events.TEST_BEGIN, {browserId: 'some-browser'});
 
         assert.calledWith(Stat.prototype.markStartBrowserTime, 'some-browser');
     });
 
-    it('should mark browser time on "SESSION_END" event', () => {
+    it('should mark browser time on "TEST_END" event', () => {
         sandbox.stub(Stat.prototype, 'markEndBrowserTime');
-        hermione.emit(hermione.events.SESSION_END, sinon.stub(), {browserId: 'some-browser'});
+        hermione.emit(hermione.events.TEST_END, {browserId: 'some-browser'});
 
         assert.calledWith(Stat.prototype.markEndBrowserTime, 'some-browser');
     });
