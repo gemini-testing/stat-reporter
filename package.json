@@ -59,7 +59,7 @@
     "proxyquire": "^1.7.10",
     "qemitter": "^1.1.0",
     "sinon": "^1.17.7",
-    "standard-version": "^3.0.0",
+    "standard-version": "^7.0.0",
     "style-loader": "^1.0.0",
     "webpack": "^4.39.2",
     "webpack-cli": "^3.3.6",
