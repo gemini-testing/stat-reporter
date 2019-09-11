@@ -22,8 +22,8 @@ module.exports = (hermione, options) => {
         });
     });
 
-    hermione.on(events.SESSION_START, (wd, data) => stat.markStartBrowserTime(data.browserId));
-    hermione.on(events.SESSION_END, (wd, data) => stat.markEndBrowserTime(data.browserId));
+    hermione.on(events.TEST_BEGIN, (data) => stat.markStartBrowserTime(data.browserId));
+    hermione.on(events.TEST_END, (data) => stat.markEndBrowserTime(data.browserId));
 
     hermione.on(events.TEST_FAIL, (data) => stat.addFailed(data.browserId));
     hermione.on(events.TEST_PASS, (data) => stat.addPassed(data.browserId));
