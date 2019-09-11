@@ -1,6 +1,13 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### [0.4.1](https://github.com/gemini-testing/stat-reporter/compare/v0.4.0...v0.4.1) (2019-09-11)
+
+
+### Bug Fixes
+
+* countdown session time on event TEST_BEGIN ([6b6010b](https://github.com/gemini-testing/stat-reporter/commit/6b6010b))
 
 <a name="0.4.0"></a>
 # [0.4.0](https://github.com/gemini-testing/stat-reporter/compare/v0.3.1...v0.4.0) (2019-08-26)
