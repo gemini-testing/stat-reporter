@@ -77,32 +77,20 @@ describe('hermione', () => {
         assert.calledWith(Stat.prototype.markEndBrowserTime, 'some-browser');
     });
 
-    it('should add passed test on "TEST_PASS" event', () => {
-        sandbox.stub(Stat.prototype, 'addPassed');
-        hermione.emit(hermione.events.TEST_PASS, {browserId: 'some-browser'});
+    [
+        {event: 'TEST_PASS', method: 'addPassed'},
+        {event: 'TEST_FAIL', method: 'addFailed'},
+        {event: 'TEST_PENDING', method: 'addSkipped'},
+        {event: 'RETRY', method: 'addRetry'}
+    ].forEach(({event, method}) => {
+        it(`should add test on "${method}" event`, () => {
+            sandbox.stub(Stat.prototype, method);
+            const test = {foo: 'bar'};
 
-        assert.calledWith(Stat.prototype.addPassed, 'some-browser');
-    });
+            hermione.emit(hermione.events[event], test);
 
-    it('should add failed test on "TEST_FAIL" event', () => {
-        sandbox.stub(Stat.prototype, 'addFailed');
-        hermione.emit(hermione.events.TEST_FAIL, {browserId: 'some-browser'});
-
-        assert.calledWith(Stat.prototype.addFailed, 'some-browser');
-    });
-
-    it('should add retried test on "RETRY" event', () => {
-        sandbox.stub(Stat.prototype, 'addRetry');
-        hermione.emit(hermione.events.RETRY, {browserId: 'some-browser'});
-
-        assert.calledWith(Stat.prototype.addRetry, 'some-browser');
-    });
-
-    it('should add skipped test on "TEST_PENDING" event', () => {
-        sandbox.stub(Stat.prototype, 'addSkipped');
-        hermione.emit(hermione.events.TEST_PENDING, {browserId: 'some-browser'});
-
-        assert.calledWith(Stat.prototype.addSkipped, 'some-browser');
+            assert.calledWith(Stat.prototype[method], test);
+        });
     });
 
     it('should show collected statistic data on "RUNNER_END" event', () => {
