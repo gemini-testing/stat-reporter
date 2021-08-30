@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.1](https://github.com/gemini-testing/stat-reporter/compare/v1.0.0...v1.0.1) (2021-08-30)
+
+
+### Bug Fixes
+
+* move ui deps to dev deps ([ec7412d](https://github.com/gemini-testing/stat-reporter/commit/ec7412d))
+
 ## [1.0.0](https://github.com/gemini-testing/stat-reporter/compare/v0.4.1...v1.0.0) (2019-11-27)
 
 
