@@ -5,7 +5,7 @@ const QEmitter = require('qemitter');
 
 const lib = require('../lib/index');
 const Stat = require('../lib/stat');
-const hermionePlugin = require('../hermione');
+const hermionePlugin = require('..');
 const cliCommands = require('../lib/cli-commands');
 const utils = require('../lib/utils');
 
