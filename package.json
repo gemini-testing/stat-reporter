@@ -1,6 +1,6 @@
 {
   "name": "stat-reporter",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Plugin for hermione for displaying test browser statistics",
   "repository": {
     "type": "git",

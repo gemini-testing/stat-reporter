@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/gemini-testing/stat-reporter/compare/v1.0.1...v2.0.0) (2023-01-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* main-file is renamed
+
+### Features
+
+* rename main-file from hermione.js to index.js ([8a26f3d](https://github.com/gemini-testing/stat-reporter/commit/8a26f3dd8df27958ca7663ea49351daf7b4d4b76))
+
 ### [1.0.1](https://github.com/gemini-testing/stat-reporter/compare/v1.0.0...v1.0.1) (2021-08-30)
 
 
